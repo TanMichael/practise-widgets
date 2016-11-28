@@ -1,0 +1,97 @@
+<html>
+<head>
+  <style>
+    .progress{
+      border-radius: 50%;
+      background-color: #e6e3e3;
+      width: 4em;
+      height: 4em;
+      position: absolute;
+      margin: 2em;
+    }
+
+    .base {
+      border-radius: 50%;
+      background-color: green;
+      position: absolute;
+      width: 4em;
+      height: 4em;
+      clip: rect(0 2em 4em 0);
+    }
+
+    .dynamic {
+      border-radius: 50%;
+      background-color: green;
+      position: absolute;
+      width: 4em;
+      height: 4em;
+      top: 0;
+      clip: rect(0px 4em 4em 2em);
+    }
+
+    .mask {
+      border-radius: 50%;
+      background-color: #e6e3e3;
+      position: absolute;
+      width: 4em;
+      height: 4em;
+      top: 0;
+      clip: rect(0 2em 4em 0);
+      visibility: visible;
+    }
+
+    .progress:after {
+      content: attr(data-score) "%";
+      text-align: center;
+      line-height: 3;
+      display: block;
+      width: 3em;
+      height: 3em;
+      border-radius: 50%;
+      background-color: white;
+      position: absolute;
+      top: .5em;
+      left: .5em;
+    }
+
+    .progress.less-half > .dynamic {
+      visibility: hidden;
+    }
+    .progress.less-half > .base {
+      /* 360 * 0.22 deg */
+      transform: rotate(79.2deg);
+    }
+
+    .progress.more-half {
+      left: 100px;
+    }
+    .progress.more-half > .mask {
+      visibility: hidden;
+    }
+    .progress.more-half > .base {
+      /* 360 * 0.88 deg */
+      transform: rotate(316.8deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress less-half" data-score="22" style="font-size:10px;">
+    <div class="base">
+    </div>
+    <div class="dynamic">
+    </div>
+    <div class="mask">
+    </div>
+  </div>
+
+  <div class="progress more-half" data-score="88">
+    <div class="base">
+    </div>
+    <div class="dynamic">
+    </div>
+    <div class="mask">
+    </div>
+  </div>
+</body>
+<html>

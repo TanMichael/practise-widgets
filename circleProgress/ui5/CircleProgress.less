@@ -1,0 +1,86 @@
+@length: 4em;
+@contentColor: white;
+@progressColor: green;
+@progressColor-warn: #e6721d;
+@progressBackground: #e6e3e3;
+
+.size {
+  width: @length;
+  height: @length;
+  border-radius: 50%;
+}
+
+.sap-anw-fin-circle-progress{
+  /*width: 100%;*/
+  height: @length + 0.5em;
+  position: relative;
+
+  .sap-anw-fin-circle-progress-inner{
+    .size;
+    background-color: @progressBackground;
+    position: absolute;
+    top: 0.25em;
+    left: 0.25em;
+
+    .base {
+      .size;
+      background-color: @progressColor;
+      position: absolute;
+      clip: rect(0 @length / 2 @length 0);
+      transition: transform 2s;
+    }
+
+    .dynamic {
+      .size;
+      background-color: @progressColor;
+      position: absolute;
+      top: 0;
+      clip: rect(0px @length @length @length / 2);
+    }
+
+    .mask {
+      .size;
+      background-color: #e6e3e3;
+      position: absolute;
+      top: 0;
+      clip: rect(0 @length / 2 @length 0);
+    }
+
+    &:after {
+      content: attr(data-progress) "%";
+      text-align: center;
+      line-height: 3;
+      display: block;
+      width: @length * 0.75;
+      height: @length * 0.75;
+      border-radius: 50%;
+      background-color: @contentColor;
+      position: absolute;
+      top: @length * 0.125;
+      left: @length * 0.125;
+    }
+
+    &.less-half > .dynamic {
+      visibility: hidden;
+    }
+    &.less-half > .base {
+      background-color: @progressColor-warn;
+    }
+
+    &.more-half > .mask {
+      visibility: hidden;
+    }
+    /*&.more-half > .base {
+      360 * 0.88 deg 
+      transform: rotate(316.8deg);
+    }*/
+  }
+}
+
+
+
+
+
+/*.progress.more-half {
+  left: 100px;
+}*/
